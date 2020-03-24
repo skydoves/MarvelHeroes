@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="details"
+      type="com.skydoves.marvelheroes.model.PosterDetails" />
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="60dp"
+    android:visibility="gone"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:visibility="visible">
+
+    <com.google.android.material.card.MaterialCardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:foreground="?attr/selectableItemBackground"
+      app:cardBackgroundColor="@color/background"
+      app:cardCornerRadius="12dp"
+      app:cardElevation="16dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="16dp"
+        tools:ignore="UnusedAttribute">
+
+        <com.google.android.material.card.MaterialCardView
+          android:id="@+id/item_container"
+          android:layout_width="100dp"
+          android:layout_height="wrap_content"
+          android:background="@color/background800"
+          app:cardBackgroundColor="@color/background800"
+          app:cardCornerRadius="12dp"
+          app:cardElevation="12dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent">
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:orientation="vertical"
+            tools:ignore="UnusedAttribute">
+
+            <androidx.appcompat.widget.AppCompatImageView
+              android:id="@+id/item_poster_post"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:scaleType="center"
+              app:layout_constraintDimensionRatio="H,9:13"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:loadImage="@{details.poster}" />
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/detail_plot_title"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:text="@{details.name}"
+          android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+          android:textSize="28sp"
+          android:textStyle="bold"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/item_container"
+          tools:text="Iron Man" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/detail_plot_description"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:ellipsize="end"
+          android:gravity="center"
+          android:maxEms="20"
+          android:maxLines="15"
+          android:text="@{details.plot}"
+          android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+          android:textColor="@color/white_87"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/detail_plot_title"
+          tools:text="Iron Man" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
