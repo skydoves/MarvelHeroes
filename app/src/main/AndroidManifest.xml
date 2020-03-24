@@ -13,9 +13,13 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
-    tools:ignore="AllowBackup">
-    <activity android:name=".view.ui.details.DetailActivity"></activity>
-    <activity android:name=".view.ui.main.MainActivity">
+    tools:ignore="AllowBackup, LockedOrientationActivity">
+    <activity
+      android:name=".view.ui.details.DetailActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".view.ui.main.MainActivity"
+      android:screenOrientation="portrait">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
