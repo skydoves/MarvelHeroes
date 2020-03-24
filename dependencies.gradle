@@ -17,10 +17,6 @@ ext.versions = [
     constraintVersion   : '1.1.3',
 
     // architecture components
-    activityKtxVersion  : '1.1.0',
-    fragmentKtxVersion  : '1.2.1',
-    activityVersion     : '1.1.0-rc03',
-    archCompomentVersion: '2.0.0',
     lifecycleVersion    : '2.2.0',
     roomVersion         : '2.2.4',
 

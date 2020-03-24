@@ -42,7 +42,6 @@ dependencies {
   implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion"
   implementation "androidx.room:room-runtime:$versions.roomVersion"
   kapt "androidx.room:room-compiler:$versions.roomVersion"
-  testImplementation "androidx.arch.core:core-testing:$versions.archCompomentVersion"
 
   // koin
   implementation "org.koin:koin-android:$versions.koinVersion"
