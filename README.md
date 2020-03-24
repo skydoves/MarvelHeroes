@@ -3,6 +3,7 @@
 <p align="center">
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
   <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
+  <a href="https://github.com/skydoves/MarvelHeroes/actions"><img alt="Build Status" src="https://github.com/skydoves/MarvelHeroes/workflows/Android%20CI/badge.svg"/></a> 
   <a href="https://github.com/skydoves"><img alt="Profile" src="https://skydoves.github.io/badges/skydoves.svg"/></a> 
 </p>
 
@@ -14,7 +15,7 @@ Fetching data from the network and integrating persisted data in the database vi
 
 <p align="center">
 <img src="/previews/screenshot.png"/>
-</p><br>
+</p>
 
 ## Download
 Go to the [Releases](https://github.com/skydoves/MarvelHeroes/releases) to download the lastest APK.
@@ -32,15 +33,14 @@ Go to the [Releases](https://github.com/skydoves/MarvelHeroes/releases) to downl
 - Architecture
   - MVVM Architecture (View - DataBinding - ViewModel - Model)
   - Repository pattern
-  - [Koin](https://github.com/InsertKoinIO/koin) - dependency injection
-- Material Design & Animations
-- [Retrofit2 & Gson](https://github.com/square/retrofit) - construct the REST APIs
-- [OkHttp3](https://github.com/square/okhttp) - implementing interceptor, logging and mocking web server
-- [Glide](https://github.com/bumptech/glide) - loading images
-- [TransformationLayout](https://github.com/skydoves/transformationlayout) - implementing transformation motion animations
-- [WhatIf](https://github.com/skydoves/whatif) - checking nullable object and empty collections more fluently
-- [DiscreteScrollView](https://github.com/yarolegovich/DiscreteScrollView) - implementing a scrollable list of items
-- [Timber](https://github.com/JakeWharton/timber) - logging
+  - [Koin](https://github.com/InsertKoinIO/koin) - dependency injection.
+- [Retrofit2 & Gson](https://github.com/square/retrofit) - construct the REST APIs.
+- [OkHttp3](https://github.com/square/okhttp) - implementing interceptor, logging and mocking web server.
+- [Glide](https://github.com/bumptech/glide) - loading images.
+- [TransformationLayout](https://github.com/skydoves/transformationlayout) - implementing transformation motion animations.
+- [WhatIf](https://github.com/skydoves/whatif) - checking nullable object and empty collections more fluently.
+- [DiscreteScrollView](https://github.com/yarolegovich/DiscreteScrollView) - implementing a scrollable list of items.
+- [Timber](https://github.com/JakeWharton/timber) - logging.
 - [Material-Components](https://github.com/material-components/material-components-android) - Material design components like ripple animation, cardView.
 
 ## Find this repository useful? :heart:
