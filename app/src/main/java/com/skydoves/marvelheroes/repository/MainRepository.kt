@@ -38,7 +38,7 @@ class MainRepository constructor(
     Timber.d("Injection MainRepository")
   }
 
-  suspend fun loadDisneyPosters(error: (String) -> Unit) = withContext(Dispatchers.IO) {
+  suspend fun loadMarvelPosters(error: (String) -> Unit) = withContext(Dispatchers.IO) {
     val liveData = MutableLiveData<List<Poster>>()
     var posters = posterDao.getPosterList()
     if (posters.isEmpty()) {

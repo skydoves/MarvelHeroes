@@ -38,7 +38,7 @@ class MainViewModel constructor(
 
     this.posterListLiveData = this.posterFetchingLiveData.switchMap {
       launchOnViewModelScope {
-        this.mainRepository.loadDisneyPosters { this.toastLiveData.postValue(it) }
+        this.mainRepository.loadMarvelPosters { this.toastLiveData.postValue(it) }
       }
     }
   }
