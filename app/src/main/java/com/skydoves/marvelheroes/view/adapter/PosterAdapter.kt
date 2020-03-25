@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.skydoves.marvelheroes.R
 import com.skydoves.marvelheroes.databinding.ItemPosterBinding
 import com.skydoves.marvelheroes.model.Poster
-import com.skydoves.marvelheroes.view.ui.details.DetailActivity
+import com.skydoves.marvelheroes.view.ui.details.PosterDetailActivity
 
 class PosterAdapter : RecyclerView.Adapter<PosterAdapter.PosterViewHolder>() {
 
@@ -50,7 +50,7 @@ class PosterAdapter : RecyclerView.Adapter<PosterAdapter.PosterViewHolder>() {
       poster = item
       executePendingBindings()
       root.setOnClickListener {
-        DetailActivity.startActivity(it.context, transformationLayout, item)
+        PosterDetailActivity.startActivity(it.context, transformationLayout, item)
       }
     }
   }

@@ -21,7 +21,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.skydoves.marvelheroes.R
 import com.skydoves.marvelheroes.base.DatabindingActivity
-import com.skydoves.marvelheroes.databinding.ActivityDetailBinding
+import com.skydoves.marvelheroes.databinding.ActivityPosterDetailBinding
 import com.skydoves.marvelheroes.extensions.onTransformationEndContainerApplyParams
 import com.skydoves.marvelheroes.model.Poster
 import com.skydoves.marvelheroes.view.adapter.PosterSeriesAdapter
@@ -29,9 +29,9 @@ import com.skydoves.transformationlayout.TransformationCompat
 import com.skydoves.transformationlayout.TransformationLayout
 import org.koin.android.viewmodel.ext.android.getViewModel
 
-class DetailActivity : DatabindingActivity() {
+class PosterDetailActivity : DatabindingActivity() {
 
-  private val binding: ActivityDetailBinding by binding(R.layout.activity_detail)
+  private val binding: ActivityPosterDetailBinding by binding(R.layout.activity_poster_detail)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     onTransformationEndContainerApplyParams()
@@ -41,7 +41,6 @@ class DetailActivity : DatabindingActivity() {
     binding.apply {
       adapter = PosterSeriesAdapter(plot)
       this.poster = poster
-      recyclerView.isEnabled = false
     }
   }
 
@@ -52,7 +51,7 @@ class DetailActivity : DatabindingActivity() {
       transformationLayout: TransformationLayout,
       poster: Poster
     ) {
-      val intent = Intent(context, DetailActivity::class.java)
+      val intent = Intent(context, PosterDetailActivity::class.java)
       intent.putExtra(posterId, poster.id)
       TransformationCompat.startActivity(transformationLayout, intent)
     }

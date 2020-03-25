@@ -15,7 +15,7 @@
     android:theme="@style/AppTheme"
     tools:ignore="AllowBackup, LockedOrientationActivity">
     <activity
-      android:name=".view.ui.details.DetailActivity"
+      android:name=".view.ui.details.PosterDetailActivity"
       android:screenOrientation="portrait" />
     <activity
       android:name=".view.ui.main.MainActivity"
