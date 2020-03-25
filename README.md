@@ -43,6 +43,12 @@ Go to the [Releases](https://github.com/skydoves/MarvelHeroes/releases) to downl
 - [Timber](https://github.com/JakeWharton/timber) - logging.
 - [Material-Components](https://github.com/material-components/material-components-android) - Material design components like ripple animation, cardView.
 
+## Architecture
+MarvelHeroes is based on MVVM architecture and a repository pattern.
+
+![architecture](https://user-images.githubusercontent.com/24237865/77502018-f7d36000-6e9c-11ea-92b0-1097240c8689.png)
+
+
 ## Find this repository useful? :heart:
 Support it by joining __[stargazers](https://github.com/skydoves/MarvelHeroes/stargazers)__ for this repository. :star: <br>
 And __[follow](https://github.com/skydoves)__ me for my next creations! 🤩
