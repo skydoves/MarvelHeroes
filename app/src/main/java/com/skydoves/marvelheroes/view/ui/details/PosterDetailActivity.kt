@@ -39,6 +39,8 @@ class PosterDetailActivity : DatabindingActivity() {
     val poster =
       getViewModel<PosterDetailViewModel>().getPoster(intent.getLongExtra(posterId, 0))
     binding.apply {
+      lifecycleOwner = this@PosterDetailActivity
+      activity = this@PosterDetailActivity
       adapter = PosterSeriesAdapter(plot)
       this.poster = poster
     }

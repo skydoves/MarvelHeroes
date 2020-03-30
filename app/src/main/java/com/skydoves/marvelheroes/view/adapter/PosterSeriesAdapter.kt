@@ -58,7 +58,6 @@ class PosterSeriesAdapter(
     val item = items[position]
     holder.binding.apply {
       details = item
-      layoutPlotBinding.details = item
       executePendingBindings()
       root.setOnClickListener {
         if (selectable) {

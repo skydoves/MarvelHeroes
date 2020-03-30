@@ -16,6 +16,8 @@
 
 package com.skydoves.marvelheroes.binding
 
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -25,4 +27,9 @@ fun bindLoadImage(view: AppCompatImageView, url: String) {
   Glide.with(view.context)
     .load(url)
     .into(view)
+}
+
+@BindingAdapter("onBackPressed")
+fun bindOnBackPressed(view: View, activity: AppCompatActivity) {
+  view.setOnClickListener { activity.onBackPressed() }
 }
