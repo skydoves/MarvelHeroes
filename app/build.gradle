@@ -12,6 +12,11 @@ android {
     targetSdkVersion versions.compileSdk
     versionCode versions.versionCode
     versionName versions.versionName
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+      }
+    }
   }
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
@@ -25,6 +30,17 @@ android {
   }
   androidExtensions {
     experimental = true
+  }
+  sourceSets {
+    androidTest.java.srcDirs += "src/test-common/java"
+    test.java.srcDirs += "src/test-common/java"
+    test.assets.srcDirs += files("$projectDir/schemas".toString())
+  }
+  testOptions {
+    unitTests {
+      includeAndroidResources = true
+      returnDefaultValues = true
+    }
   }
 }
 
@@ -73,6 +89,13 @@ dependencies {
 
   // debugging
   implementation "com.jakewharton.timber:timber:$versions.timberVersion"
+
+  // unit test
+  testImplementation "junit:junit:$versions.junitVersion"
+  testImplementation "androidx.test:core:$versions.androidxTest"
+  testImplementation "org.robolectric:robolectric:$versions.robolectricVersion"
+  testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockitoKotlinVersion"
+  testImplementation "org.mockito:mockito-inline:$versions.mockitoInlineVersion"
 }
 
 apply from: '../spotless.gradle'
