@@ -6,7 +6,7 @@ ext.versions = [
 
     // gradle plugins
     gradleBuildTool     : '3.5.3',
-    spotlessGradle      : '3.27.2',
+    spotlessGradle      : '3.28.1',
     versionPlugin       : '0.23.0',
 
     // kotlin
@@ -19,6 +19,7 @@ ext.versions = [
     // architecture components
     lifecycleVersion    : '2.2.0',
     roomVersion         : '2.2.5',
+    archCompomentVersion: '2.0.0',
 
     // di
     koinVersion         : '2.0.1',
