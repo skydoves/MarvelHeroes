@@ -43,6 +43,11 @@ Go to the [Releases](https://github.com/skydoves/MarvelHeroes/releases) to downl
 - [Timber](https://github.com/JakeWharton/timber) - logging.
 - [Material-Components](https://github.com/material-components/material-components-android) - Material design components like ripple animation, cardView.
 
+## Unit Testing Frameworks
+Unit Tests verify the interactions of viewmodels between repositories and dao & REST api requests.
+- [Robolectric](https://github.com/robolectric/robolectric) - Robolectric is the industry-standard unit testing framework for Android.
+- [Mockito-Kotlin](https://github.com/nhaarman/mockito-kotlin) - a small library that provides helper functions to work with Mockito in Kotlin.
+
 ## Architecture
 MarvelHeroes is based on MVVM architecture and a repository pattern.
 
