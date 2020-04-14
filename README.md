@@ -48,6 +48,8 @@ Unit Tests verify the interactions of viewmodels between repositories and dao & 
 - [Robolectric](https://github.com/robolectric/robolectric) - Robolectric is the industry-standard unit testing framework for Android.
 - [Mockito-Kotlin](https://github.com/nhaarman/mockito-kotlin) - a small library that provides helper functions to work with Mockito in Kotlin.
 
+![screenshot555159853](https://user-images.githubusercontent.com/24237865/79233416-cb12d700-7ea3-11ea-9a17-a4a732c379f4.png)
+
 ## Architecture
 MarvelHeroes is based on MVVM architecture and a repository pattern.
 
