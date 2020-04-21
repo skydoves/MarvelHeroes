@@ -27,11 +27,6 @@ fun View.visible() {
   visibility = View.VISIBLE
 }
 
-/** makes gone a view. */
-fun View.gone() {
-  visibility = View.GONE
-}
-
 /** circular revealed at right-end of a view. */
 fun View.circularRevealedAtCenter(@ColorInt color: Int) {
   val cx = 0
