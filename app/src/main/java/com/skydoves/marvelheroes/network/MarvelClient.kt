@@ -17,12 +17,23 @@
 package com.skydoves.marvelheroes.network
 
 import com.skydoves.marvelheroes.model.Poster
+import com.skydoves.sandwich.ApiResponse
+import com.skydoves.sandwich.ResponseDataSource
 
 class MarvelClient(private val marvelService: MarvelService) {
 
   fun fetchMarvelPosters(
+    dataSource: ResponseDataSource<List<Poster>>,
     onResult: (response: ApiResponse<List<Poster>>) -> Unit
   ) {
-    this.marvelService.fetchMarvelPosterList().transform(onResult)
+    dataSource
+      // retry fetching data 3 times with 5000 milli-seconds time interval when the request gets failure.
+      .retry(3, 5000L)
+      // combine network service to the data source.
+      .combine(marvelService.fetchMarvelPosterList(), onResult)
+      // request API network call asynchronously.
+      // if the request is successful, the data source will hold the success data.
+      // in the next request after success, returns the cached API response with data.
+      .request()
   }
 }

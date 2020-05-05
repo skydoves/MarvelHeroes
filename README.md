@@ -36,6 +36,7 @@ Go to the [Releases](https://github.com/skydoves/MarvelHeroes/releases) to downl
   - [Koin](https://github.com/InsertKoinIO/koin) - dependency injection.
 - [Retrofit2 & Gson](https://github.com/square/retrofit) - construct the REST APIs.
 - [OkHttp3](https://github.com/square/okhttp) - implementing interceptor, logging and mocking web server.
+- [Sandwich](https://github.com/skydoves/Sandwich) - construct lightweight http API response and handling error responses.
 - [Glide](https://github.com/bumptech/glide) - loading images.
 - [TransformationLayout](https://github.com/skydoves/transformationlayout) - implementing transformation motion animations.
 - [WhatIf](https://github.com/skydoves/whatif) - checking nullable object and empty collections more fluently.

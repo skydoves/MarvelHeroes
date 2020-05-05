@@ -30,6 +30,7 @@ import com.skydoves.marvelheroes.persistence.PosterDao
 import com.skydoves.marvelheroes.repository.MainRepository
 import com.skydoves.marvelheroes.utils.MockTestUtil
 import com.skydoves.marvelheroes.view.ui.main.MainViewModel
+import com.skydoves.sandwich.ResponseDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -44,6 +45,7 @@ class MainViewModelTest {
   private val marvelService: MarvelService = mock()
   private val marvelClient: MarvelClient = MarvelClient(marvelService)
   private val posterDao: PosterDao = mock()
+  private val dataSource: ResponseDataSource<List<Poster>> = mock()
 
   @ExperimentalCoroutinesApi
   @get:Rule
@@ -55,7 +57,7 @@ class MainViewModelTest {
   @ExperimentalCoroutinesApi
   @Before
   fun setup() {
-    mainRepository = MainRepository(marvelClient, posterDao)
+    mainRepository = MainRepository(marvelClient, dataSource, posterDao)
     viewModel = MainViewModel(mainRepository)
   }
 

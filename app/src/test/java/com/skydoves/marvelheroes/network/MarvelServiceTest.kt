@@ -19,6 +19,8 @@ package com.skydoves.marvelheroes.network
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.skydoves.marvelheroes.model.Poster
+import com.skydoves.sandwich.ApiResponse
+import com.skydoves.sandwich.ResponseDataSource
 import java.io.IOException
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.instanceOf
@@ -49,6 +51,7 @@ class MarvelServiceTest : ApiAbstract<MarvelService>() {
     assertThat(responseBody[0].name, `is`("Deadpool"))
     assertThat(responseBody[0].color, `is`("#770609"))
 
+    val dataSource = ResponseDataSource<List<Poster>>()
     val onResult: (response: ApiResponse<List<Poster>>) -> Unit = {
       assertThat(it, instanceOf(ApiResponse.Success::class.java))
       val response: List<Poster> = requireNotNull((it as ApiResponse.Success).data)
@@ -57,11 +60,11 @@ class MarvelServiceTest : ApiAbstract<MarvelService>() {
       assertThat(response[0].color, `is`("#770609"))
     }
 
-    whenever(client.fetchMarvelPosters(onResult)).thenAnswer {
-      val response: (response: ApiResponse<List<Poster>>) -> Unit = it.getArgument(0)
+    whenever(client.fetchMarvelPosters(dataSource, onResult)).thenAnswer {
+      val response: (response: ApiResponse<List<Poster>>) -> Unit = it.getArgument(1)
       response(ApiResponse.Success(Response.success(responseBody)))
     }
 
-    client.fetchMarvelPosters(onResult)
+    client.fetchMarvelPosters(dataSource, onResult)
   }
 }

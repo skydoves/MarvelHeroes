@@ -18,10 +18,13 @@ package com.skydoves.marvelheroes.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.skydoves.marvelheroes.model.Poster
-import com.skydoves.marvelheroes.network.ApiResponse
 import com.skydoves.marvelheroes.network.MarvelClient
-import com.skydoves.marvelheroes.network.message
 import com.skydoves.marvelheroes.persistence.PosterDao
+import com.skydoves.sandwich.ResponseDataSource
+import com.skydoves.sandwich.message
+import com.skydoves.sandwich.onError
+import com.skydoves.sandwich.onException
+import com.skydoves.sandwich.onSuccess
 import com.skydoves.whatif.whatIfNotNull
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -29,6 +32,7 @@ import timber.log.Timber
 
 class MainRepository constructor(
   private val marvelClient: MarvelClient,
+  private val marvelDataSource: ResponseDataSource<List<Poster>>,
   private val posterDao: PosterDao
 ) : Repository {
 
@@ -43,19 +47,23 @@ class MainRepository constructor(
     var posters = posterDao.getPosterList()
     if (posters.isEmpty()) {
       isLoading = true
-      marvelClient.fetchMarvelPosters { response ->
+      marvelClient.fetchMarvelPosters(marvelDataSource) { apiResponse ->
         isLoading = false
-        when (response) {
-          is ApiResponse.Success -> {
-            response.data.whatIfNotNull {
+        apiResponse
+          // handle the case when the API request gets a success response.
+          .onSuccess {
+            data.whatIfNotNull {
               posters = it
               liveData.postValue(it)
               posterDao.insertPosterList(it)
             }
           }
-          is ApiResponse.Failure.Error -> error(response.message())
-          is ApiResponse.Failure.Exception -> error(response.message())
-        }
+          // handle the case when the API request gets a error response.
+          // e.g. internal server error.
+          .onError { error(message()) }
+          // handle the case when the API request gets a exception response.
+          // e.g. network connection error.
+          .onException { error(message()) }
       }
     }
     liveData.apply { postValue(posters) }
