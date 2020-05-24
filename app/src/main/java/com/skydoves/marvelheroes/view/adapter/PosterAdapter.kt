@@ -48,6 +48,7 @@ class PosterAdapter : RecyclerView.Adapter<PosterAdapter.PosterViewHolder>() {
     val item = items[position]
     holder.binding.apply {
       poster = item
+      veil = itemVeilLayout
       executePendingBindings()
       root.setOnClickListener {
         PosterDetailActivity.startActivity(it.context, transformationLayout, item)

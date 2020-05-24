@@ -87,6 +87,9 @@ dependencies {
   // whatIf
   implementation "com.github.skydoves:whatif:$versions.whatIfVersion"
 
+  // android veil
+  implementation "com.github.skydoves:androidveil:$versions.androidVeilVersion"
+
   // discrete scrollview
   implementation "com.yarolegovich:discrete-scrollview:$versions.discreteScrollview"
 

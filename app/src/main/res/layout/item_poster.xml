@@ -8,6 +8,10 @@
     <variable
       name="poster"
       type="com.skydoves.marvelheroes.model.Poster" />
+
+    <variable
+      name="veil"
+      type="com.skydoves.androidveil.VeilLayout" />
   </data>
 
   <com.google.android.material.card.MaterialCardView
@@ -21,64 +25,79 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="12dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.skydoves.androidveil.VeilLayout
+      android:id="@+id/item_veilLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:foreground="?attr/selectableItemBackground"
-      android:orientation="vertical"
-      tools:ignore="UnusedAttribute">
+      app:veilLayout_baseAlpha="0.9"
+      app:veilLayout_baseColor="@color/background"
+      app:veilLayout_dropOff="0.5"
+      app:veilLayout_highlightAlpha="1.0"
+      app:veilLayout_radius="12dp"
+      app:veilLayout_shimmerEnable="true"
+      app:veilLayout_veiled="true">
 
-      <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/item_poster_post"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scaleType="center"
-        app:layout_constraintDimensionRatio="H,9.5:16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:loadImage="@{poster.poster}" />
-
-      <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/item_poster_title"
+      <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:text="@{poster.name}"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        android:textColor="@color/white"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:autoSizeMaxTextSize="26sp"
-        app:autoSizeMinTextSize="16sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/transformationLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Iron Man" />
-
-      <com.skydoves.transformationlayout.TransformationLayout
-        android:id="@+id/transformationLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:transformation_duration="550"
-        app:transformation_pathMode="arc">
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="vertical"
+        tools:ignore="UnusedAttribute">
 
         <androidx.appcompat.widget.AppCompatImageView
-          android:id="@+id/play"
-          android:layout_width="42dp"
-          android:layout_height="42dp"
-          app:srcCompat="@drawable/ic_play_circle_outline" />
+          android:id="@+id/item_poster_post"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:scaleType="center"
+          app:layout_constraintDimensionRatio="H,9.5:16"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:loadImageWithVeil="@{poster.poster}"
+          app:withVeil="@{veil}" />
 
-      </com.skydoves.transformationlayout.TransformationLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/item_poster_title"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="22dp"
+          android:maxLines="1"
+          android:padding="8dp"
+          android:text="@{poster.name}"
+          android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+          android:textColor="@color/white"
+          android:textSize="26sp"
+          android:textStyle="bold"
+          app:autoSizeMaxTextSize="26sp"
+          app:autoSizeMinTextSize="16sp"
+          app:autoSizeTextType="uniform"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintBottom_toTopOf="@+id/transformationLayout"
+          app:layout_constraintEnd_toEndOf="parent"
+          tools:text="Iron Man" />
+
+        <com.skydoves.transformationlayout.TransformationLayout
+          android:id="@+id/transformationLayout"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="24dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:transformation_duration="550"
+          app:transformation_pathMode="arc">
+
+          <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/play"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            app:srcCompat="@drawable/ic_play_circle_outline" />
+
+        </com.skydoves.transformationlayout.TransformationLayout>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.skydoves.androidveil.VeilLayout>
 
   </com.google.android.material.card.MaterialCardView>
-
 
 </layout>
