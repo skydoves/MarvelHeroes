@@ -42,6 +42,7 @@ class PosterDetailActivity : DatabindingActivity() {
       lifecycleOwner = this@PosterDetailActivity
       activity = this@PosterDetailActivity
       adapter = PosterSeriesAdapter(plot)
+      veil = posterVeil
       this.poster = poster
     }
   }

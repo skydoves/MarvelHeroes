@@ -16,6 +16,10 @@
     <variable
       name="activity"
       type="androidx.appcompat.app.AppCompatActivity" />
+
+    <variable
+      name="veil"
+      type="com.skydoves.androidveil.VeilLayout" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,80 +40,95 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
 
-      <androidx.constraintlayout.widget.ConstraintLayout
+      <com.skydoves.androidveil.VeilLayout
+        android:id="@+id/posterVeil"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:veilLayout_baseAlpha="0.9"
+        app:veilLayout_baseColor="@color/background"
+        app:veilLayout_dropOff="0.5"
+        app:veilLayout_highlightAlpha="1.0"
+        app:veilLayout_radius="12dp"
+        app:veilLayout_shimmerEnable="true"
+        app:veilLayout_veiled="true">
 
-        <androidx.appcompat.widget.AppCompatImageView
-          android:id="@+id/posterImage"
+        <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:scaleType="center"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:loadImage="@{poster.poster}" />
+          app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-          android:id="@+id/back"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:padding="16dp"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:onBackPressed="@{activity}"
-          app:srcCompat="@drawable/ic_arrow_back" />
+          <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/posterImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImageWithVeil="@{poster.poster}"
+            app:withVeil="@{veil}" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:src="@drawable/foreground_gradient_black"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
+          <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:onBackPressed="@{activity}"
+            app:srcCompat="@drawable/ic_arrow_back" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-          android:id="@+id/item_poster_title"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="22dp"
-          android:layout_marginBottom="8dp"
-          android:maxLines="1"
-          android:text="@{poster.name}"
-          android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-          android:textColor="@color/white"
-          android:textSize="36sp"
-          android:textStyle="bold"
-          app:layout_constraintBottom_toTopOf="@id/item_quotes"
-          app:layout_constraintEnd_toEndOf="parent"
-          tools:text="Iron Man" />
+          <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/foreground_gradient_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-          android:id="@+id/item_quotes"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="26dp"
-          android:layout_marginBottom="26dp"
-          android:text="@{poster.quote}"
-          android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-          android:textColor="@color/white_93"
-          android:textSize="24sp"
-          android:textStyle="bold"
-          app:autoSizeMaxTextSize="24sp"
-          app:autoSizeMinTextSize="16sp"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          tools:text="quotes" />
+          <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_poster_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginBottom="8dp"
+            android:maxLines="1"
+            android:text="@{poster.name}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textColor="@color/white"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/item_quotes"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Iron Man" />
 
-        <include
-          android:id="@+id/plot"
-          layout="@layout/layout_plot"
-          app:details="@{poster.details[0]}" />
+          <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_quotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginBottom="26dp"
+            android:text="@{poster.quote}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textColor="@color/white_93"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="24sp"
+            app:autoSizeMinTextSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="quotes" />
 
-      </androidx.constraintlayout.widget.ConstraintLayout>
+          <include
+            android:id="@+id/plot"
+            layout="@layout/layout_plot"
+            app:details="@{poster.details[0]}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+      </com.skydoves.androidveil.VeilLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
