@@ -44,7 +44,7 @@ class MainRepository constructor(
 
   suspend fun loadMarvelPosters(error: (String) -> Unit) = withContext(Dispatchers.IO) {
     val liveData = MutableLiveData<List<Poster>>()
-    var posters = posterDao.getPosterList()
+    val posters = posterDao.getPosterList()
     if (posters.isEmpty()) {
       isLoading = true
       marvelClient.fetchMarvelPosters(marvelDataSource) { apiResponse ->
@@ -53,7 +53,6 @@ class MainRepository constructor(
           // handle the case when the API request gets a success response.
           .onSuccess {
             data.whatIfNotNull {
-              posters = it
               liveData.postValue(it)
               posterDao.insertPosterList(it)
             }
