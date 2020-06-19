@@ -18,6 +18,7 @@ package com.skydoves.marvelheroes.network
 
 import com.skydoves.marvelheroes.model.Poster
 import com.skydoves.sandwich.ApiResponse
+import com.skydoves.sandwich.DataRetainPolicy
 import com.skydoves.sandwich.ResponseDataSource
 
 class MarvelClient(private val marvelService: MarvelService) {
@@ -27,6 +28,9 @@ class MarvelClient(private val marvelService: MarvelService) {
     onResult: (response: ApiResponse<List<Poster>>) -> Unit
   ) {
     dataSource
+      // Retain fetched data on the memory storage temporarily.
+      // If request again, returns the retained data instead of re-fetching from the network.
+      .dataRetainPolicy(DataRetainPolicy.RETAIN)
       // retry fetching data 3 times with 5000 milli-seconds time interval when the request gets failure.
       .retry(3, 5000L)
       // combine network service to the data source.
