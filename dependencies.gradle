@@ -25,8 +25,8 @@ ext.versions = [
     koinVersion         : '2.0.1',
 
     // network
-    retrofitVersion     : '2.7.2',
-    okhttpVersion       : '4.1.0',
+    retrofitVersion     : '2.9.0',
+    okhttpVersion       : '4.7.2',
     sandwichVersion     : '1.0.2',
 
     // coroutines
