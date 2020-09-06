@@ -49,10 +49,12 @@ fun bindAdapterPosterList(view: DiscreteScrollView, posters: List<Poster>?) {
   posters.whatIfNotNullOrEmpty {
     (view.adapter as? PosterAdapter)?.updatePosterList(it)
   }
-  view.setItemTransformer(ScaleTransformer.Builder()
-    .setMaxScale(1.25f)
-    .setMinScale(0.8f)
-    .build())
+  view.setItemTransformer(
+    ScaleTransformer.Builder()
+      .setMaxScale(1.25f)
+      .setMinScale(0.8f)
+      .build()
+  )
 }
 
 @BindingAdapter("bindOnItemChanged", "bindOnItemChangedBackground")

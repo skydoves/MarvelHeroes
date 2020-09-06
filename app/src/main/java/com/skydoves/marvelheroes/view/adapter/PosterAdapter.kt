@@ -32,7 +32,11 @@ class PosterAdapter : RecyclerView.Adapter<PosterAdapter.PosterViewHolder>() {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosterViewHolder {
     val inflater = LayoutInflater.from(parent.context)
     val binding = DataBindingUtil.inflate<ItemPosterBinding>(
-      inflater, R.layout.item_poster, parent, false)
+      inflater,
+      R.layout.item_poster,
+      parent,
+      false
+    )
     return PosterViewHolder(binding)
   }
 

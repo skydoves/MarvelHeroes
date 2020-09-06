@@ -21,13 +21,13 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.skydoves.marvelheroes.model.Poster
 import com.skydoves.sandwich.ApiResponse
 import com.skydoves.sandwich.ResponseDataSource
-import java.io.IOException
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
 import retrofit2.Response
+import java.io.IOException
 
 class MarvelServiceTest : ApiAbstract<MarvelService>() {
 
