@@ -18,7 +18,7 @@ Fetching data from the network and integrating persisted data in the database vi
 </p>
 
 ## Download
-Go to the [Releases](https://github.com/skydoves/MarvelHeroes/releases) to download the lastest APK.
+Go to the [Releases](https://github.com/skydoves/MarvelHeroes/releases) to download the latest APK.
 
 <img src="/previews/preview.gif" align="right" width="32%"/>
 
