@@ -20,7 +20,6 @@ import android.graphics.Color
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.skydoves.marvelheroes.extensions.circularRevealedAtCenter
 import com.skydoves.marvelheroes.model.Poster
@@ -38,8 +37,8 @@ fun bindAdapter(view: RecyclerView, baseAdapter: RecyclerView.Adapter<*>) {
 }
 
 @BindingAdapter("toast")
-fun bindToast(view: RecyclerView, text: LiveData<String>) {
-  text.value.whatIfNotNull {
+fun bindToast(view: RecyclerView, text: String?) {
+  text.whatIfNotNullOrEmpty {
     Toast.makeText(view.context, it, Toast.LENGTH_SHORT).show()
   }
 }
