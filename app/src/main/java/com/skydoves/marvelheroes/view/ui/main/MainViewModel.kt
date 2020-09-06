@@ -31,17 +31,18 @@ class MainViewModel constructor(
   private var posterFetchingLiveData: MutableLiveData<Boolean> = MutableLiveData()
   val posterListLiveData: LiveData<List<Poster>>
 
-  val toastLiveData: MutableLiveData<String> = MutableLiveData()
+  private val _toastLiveData: MutableLiveData<String> = MutableLiveData()
+  val toastLiveData: LiveData<String> get() = _toastLiveData
 
   init {
     Timber.d("injection MainViewModel")
 
-    this.posterListLiveData = this.posterFetchingLiveData.switchMap {
+    posterListLiveData = posterFetchingLiveData.switchMap {
       launchOnViewModelScope {
-        this.mainRepository.loadMarvelPosters { this.toastLiveData.postValue(it) }
+        mainRepository.loadMarvelPosters { _toastLiveData.postValue(it) }
       }
     }
   }
 
-  fun fetchMarvelPosterList() = this.posterFetchingLiveData.postValue(true)
+  fun fetchMarvelPosterList() = posterFetchingLiveData.postValue(true)
 }
