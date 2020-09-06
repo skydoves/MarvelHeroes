@@ -37,7 +37,17 @@ class PosterAdapter : RecyclerView.Adapter<PosterAdapter.PosterViewHolder>() {
       parent,
       false
     )
-    return PosterViewHolder(binding)
+    return PosterViewHolder(binding).apply {
+      binding.root.setOnClickListener { view ->
+        val position =
+          adapterPosition.takeIf { it != RecyclerView.NO_POSITION } ?: return@setOnClickListener
+        PosterDetailActivity.startActivity(
+          view.context,
+          binding.transformationLayout,
+          items[position]
+        )
+      }
+    }
   }
 
   fun updatePosterList(posters: List<Poster>) {
@@ -49,14 +59,10 @@ class PosterAdapter : RecyclerView.Adapter<PosterAdapter.PosterViewHolder>() {
   override fun getItemCount(): Int = items.size
 
   override fun onBindViewHolder(holder: PosterViewHolder, position: Int) {
-    val item = items[position]
     holder.binding.apply {
-      poster = item
+      poster = items[position]
       veil = itemVeilLayout
       executePendingBindings()
-      root.setOnClickListener {
-        PosterDetailActivity.startActivity(it.context, transformationLayout, item)
-      }
     }
   }
 

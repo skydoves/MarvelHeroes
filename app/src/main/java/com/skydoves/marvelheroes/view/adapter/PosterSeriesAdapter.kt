@@ -44,7 +44,23 @@ class PosterSeriesAdapter(
         parent,
         false
       )
-    return PosterSeriesViewHolder(binding)
+    return PosterSeriesViewHolder(binding).apply {
+      binding.root.setOnClickListener {
+        val position =
+          adapterPosition.takeIf { it != RecyclerView.NO_POSITION } ?: return@setOnClickListener
+        if (selectable) {
+          selectable = false
+          layoutPlotBinding.details = items[position]
+          layoutPlotBinding.root.setOnClickListener {
+            binding.transformationLayout.finishTransform()
+            selectable = true
+          }
+          layoutPlotBinding.executePendingBindings()
+          binding.transformationLayout.bindTargetView(layoutPlotBinding.root)
+          binding.transformationLayout.startTransform()
+        }
+      }
+    }
   }
 
   fun updatePosterDetailsList(posterDetails: List<PosterDetails>) {
@@ -59,23 +75,9 @@ class PosterSeriesAdapter(
     holder: PosterSeriesViewHolder,
     position: Int
   ) {
-    val item = items[position]
     holder.binding.apply {
-      details = item
+      details = items[position]
       executePendingBindings()
-      root.setOnClickListener {
-        if (selectable) {
-          selectable = false
-          layoutPlotBinding.details = item
-          layoutPlotBinding.root.setOnClickListener {
-            holder.binding.transformationLayout.finishTransform()
-            selectable = true
-          }
-          layoutPlotBinding.executePendingBindings()
-          holder.binding.transformationLayout.bindTargetView(layoutPlotBinding.root)
-          holder.binding.transformationLayout.startTransform()
-        }
-      }
     }
   }
 
