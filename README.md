@@ -40,6 +40,7 @@ Go to the [Releases](https://github.com/skydoves/MarvelHeroes/releases) to downl
 - [Glide](https://github.com/bumptech/glide) - loading images.
 - [TransformationLayout](https://github.com/skydoves/transformationlayout) - implementing transformation motion animations.
 - [WhatIf](https://github.com/skydoves/whatif) - checking nullable object and empty collections more fluently.
+- [AndroidVeil](https://github.com/skydoves/androidveil) - easy way to implement veil skeletons and shimmering effect.
 - [DiscreteScrollView](https://github.com/yarolegovich/DiscreteScrollView) - implementing a scrollable list of items.
 - [Timber](https://github.com/JakeWharton/timber) - logging.
 - [Material-Components](https://github.com/material-components/material-components-android) - Material design components like ripple animation, cardView.
