@@ -42,7 +42,7 @@ ext.versions = [
     whatIfVersion       : '1.0.6',
 
     // android veil
-    androidVeilVersion  : '1.0.9',
+    androidVeilVersion  : '1.1.0',
 
     // discrete scrollview
     discreteScrollview  : '1.4.9',
