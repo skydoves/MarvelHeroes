@@ -31,6 +31,7 @@ import com.skydoves.marvelheroes.repository.MainRepository
 import com.skydoves.marvelheroes.utils.MockTestUtil
 import com.skydoves.marvelheroes.view.ui.main.MainViewModel
 import com.skydoves.sandwich.ResponseDataSource
+import com.skydoves.sandwich.disposables.CompositeDisposable
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -66,7 +67,8 @@ class MainViewModelTest {
     val mockData = MockTestUtil.mockPosterList()
     whenever(posterDao.getPosterList()).thenReturn(mockData)
 
-    val fetchedData = mainRepository.loadMarvelPosters { }
+    val compositeDisposable = CompositeDisposable()
+    val fetchedData = mainRepository.loadMarvelPosters(compositeDisposable) { }
     val observer: Observer<List<Poster>> = mock()
     fetchedData.observeForever(observer)
 

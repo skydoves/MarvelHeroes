@@ -32,6 +32,7 @@ import com.skydoves.marvelheroes.network.MarvelService
 import com.skydoves.marvelheroes.persistence.PosterDao
 import com.skydoves.marvelheroes.utils.MockTestUtil.mockPosterList
 import com.skydoves.sandwich.ResponseDataSource
+import com.skydoves.sandwich.disposables.CompositeDisposable
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -67,7 +68,8 @@ class MainRepositoryTest {
     whenever(posterDao.getPosterList()).thenReturn(emptyList())
     whenever(service.fetchMarvelPosterList()).thenReturn(getCall(mockData))
 
-    val loadData = repository.loadMarvelPosters { }
+    val compositeDisposable = CompositeDisposable()
+    val loadData = repository.loadMarvelPosters(compositeDisposable) { }
     verify(posterDao, atLeastOnce()).getPosterList()
     verify(service, atLeastOnce()).fetchMarvelPosterList()
 
