@@ -37,8 +37,6 @@ class MainRepository constructor(
   private val posterDao: PosterDao
 ) : Repository {
 
-  override var isLoading = false
-
   init {
     Timber.d("Injection MainRepository")
   }
@@ -50,9 +48,7 @@ class MainRepository constructor(
     val liveData = MutableLiveData<List<Poster>>()
     val posters = posterDao.getPosterList()
     if (posters.isEmpty()) {
-      isLoading = true
       marvelClient.fetchMarvelPosters(marvelDataSource, disposable) { apiResponse ->
-        isLoading = false
         apiResponse
           // handle the case when the API request gets a success response.
           .onSuccess {
