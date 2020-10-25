@@ -39,7 +39,7 @@ class MainViewModel constructor(
 
     posterListLiveData = posterFetchingLiveData.switchMap {
       launchOnViewModelScope {
-        mainRepository.loadMarvelPosters { _toastLiveData.postValue(it) }
+        mainRepository.loadMarvelPosters(disposables) { _toastLiveData.postValue(it) }
       }
     }
   }

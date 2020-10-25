@@ -20,11 +20,13 @@ import com.skydoves.marvelheroes.model.Poster
 import com.skydoves.sandwich.ApiResponse
 import com.skydoves.sandwich.DataRetainPolicy
 import com.skydoves.sandwich.ResponseDataSource
+import com.skydoves.sandwich.disposables.CompositeDisposable
 
 class MarvelClient(private val marvelService: MarvelService) {
 
   fun fetchMarvelPosters(
     dataSource: ResponseDataSource<List<Poster>>,
+    disposable: CompositeDisposable,
     onResult: (response: ApiResponse<List<Poster>>) -> Unit
   ) {
     dataSource
@@ -33,6 +35,8 @@ class MarvelClient(private val marvelService: MarvelService) {
       .dataRetainPolicy(DataRetainPolicy.RETAIN)
       // retry fetching data 3 times with 5000 milli-seconds time interval when the request gets failure.
       .retry(3, 5000L)
+      // joins onto CompositeDisposable as a disposable and dispose onCleared().
+      .joinDisposable(disposable)
       // combine network service to the data source.
       .combine(marvelService.fetchMarvelPosterList(), onResult)
       // request API network call asynchronously.

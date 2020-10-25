@@ -21,6 +21,7 @@ import com.skydoves.marvelheroes.model.Poster
 import com.skydoves.marvelheroes.network.MarvelClient
 import com.skydoves.marvelheroes.persistence.PosterDao
 import com.skydoves.sandwich.ResponseDataSource
+import com.skydoves.sandwich.disposables.CompositeDisposable
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.onException
@@ -42,12 +43,15 @@ class MainRepository constructor(
     Timber.d("Injection MainRepository")
   }
 
-  suspend fun loadMarvelPosters(error: (String) -> Unit) = withContext(Dispatchers.IO) {
+  suspend fun loadMarvelPosters(
+    disposable: CompositeDisposable,
+    error: (String) -> Unit
+  ) = withContext(Dispatchers.IO) {
     val liveData = MutableLiveData<List<Poster>>()
     val posters = posterDao.getPosterList()
     if (posters.isEmpty()) {
       isLoading = true
-      marvelClient.fetchMarvelPosters(marvelDataSource) { apiResponse ->
+      marvelClient.fetchMarvelPosters(marvelDataSource, disposable) { apiResponse ->
         isLoading = false
         apiResponse
           // handle the case when the API request gets a success response.
