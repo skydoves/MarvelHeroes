@@ -72,8 +72,6 @@ class MainViewModelTest {
     val observer: Observer<List<Poster>> = mock()
     fetchedData.observeForever(observer)
 
-    viewModel.fetchMarvelPosterList()
-
     verify(posterDao, atLeastOnce()).getPosterList()
     verify(observer).onChanged(mockData)
     fetchedData.removeObserver(observer)
