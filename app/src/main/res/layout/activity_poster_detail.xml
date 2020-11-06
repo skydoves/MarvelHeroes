@@ -16,10 +16,6 @@
     <variable
       name="activity"
       type="androidx.appcompat.app.AppCompatActivity" />
-
-    <variable
-      name="veil"
-      type="com.skydoves.androidveil.VeilLayout" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,7 +64,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:loadImageWithVeil="@{poster.poster}"
-            app:withVeil="@{veil}" />
+            app:withVeil="@{posterVeil}" />
 
           <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/back"

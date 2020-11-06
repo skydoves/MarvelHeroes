@@ -6,7 +6,7 @@ ext.versions = [
 
     // gradle plugins
     gradleBuildTool     : '4.1.0',
-    spotlessGradle      : '5.7.0',
+    spotlessGradle      : '5.8.0',
     versionPlugin       : '0.23.0',
 
     // kotlin
@@ -30,7 +30,7 @@ ext.versions = [
     sandwichVersion     : '1.0.6',
 
     // coroutines
-    coroutinesVersion   : '1.3.9',
+    coroutinesVersion   : '1.4.0',
 
     // glide
     glideVersion        : '4.11.0',
@@ -39,7 +39,10 @@ ext.versions = [
     transformationLayout: '1.0.4',
 
     // whatIf
-    whatIfVersion       : '1.0.6',
+    whatIfVersion       : '1.0.7',
+
+    // bundler
+    bundlerVersion      : '1.0.2',
 
     // android veil
     androidVeilVersion  : '1.1.0',
