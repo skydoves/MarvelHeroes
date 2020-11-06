@@ -14,8 +14,8 @@
       type="com.skydoves.marvelheroes.view.adapter.PosterSeriesAdapter" />
 
     <variable
-      name="activity"
-      type="androidx.appcompat.app.AppCompatActivity" />
+      name="dispatcher"
+      type="androidx.activity.OnBackPressedDispatcherOwner" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,7 +73,7 @@
             android:padding="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:onBackPressed="@{activity}"
+            app:onBackPressed="@{dispatcher}"
             app:srcCompat="@drawable/ic_arrow_back" />
 
           <androidx.appcompat.widget.AppCompatImageView

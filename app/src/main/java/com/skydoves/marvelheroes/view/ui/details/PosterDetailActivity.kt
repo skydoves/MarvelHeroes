@@ -41,7 +41,7 @@ class PosterDetailActivity : DatabindingActivity() {
     binding.apply {
       poster = getViewModel<PosterDetailViewModel>().getPoster(posterId)
       lifecycleOwner = this@PosterDetailActivity
-      activity = this@PosterDetailActivity
+      dispatcher = this@PosterDetailActivity
       adapter = PosterSeriesAdapter(plot)
     }
   }
