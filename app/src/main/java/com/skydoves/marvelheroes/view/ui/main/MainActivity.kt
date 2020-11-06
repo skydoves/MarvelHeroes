@@ -33,8 +33,8 @@ class MainActivity : DatabindingActivity() {
     super.onCreate(savedInstanceState)
     binding.apply {
       lifecycleOwner = this@MainActivity
-      vm = getViewModel<MainViewModel>().apply { fetchMarvelPosterList() }
       adapter = PosterAdapter()
+      vm = getViewModel()
     }
   }
 }

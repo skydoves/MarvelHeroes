@@ -28,7 +28,7 @@ class MainViewModel constructor(
   private val mainRepository: MainRepository
 ) : LiveCoroutinesViewModel() {
 
-  private var posterFetchingLiveData: MutableLiveData<Boolean> = MutableLiveData()
+  private var posterFetchingLiveData: MutableLiveData<Boolean> = MutableLiveData(true)
   val posterListLiveData: LiveData<List<Poster>>
 
   private val _toastLiveData: MutableLiveData<String> = MutableLiveData()
@@ -43,6 +43,4 @@ class MainViewModel constructor(
       }
     }
   }
-
-  fun fetchMarvelPosterList() = posterFetchingLiveData.postValue(true)
 }
