@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.jetbrains.kotlin.plugin.parcelize'
 apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
 
@@ -27,9 +27,6 @@ android {
   }
   buildFeatures {
     dataBinding = true
-  }
-  androidExtensions {
-    experimental = true
   }
   sourceSets {
     androidTest.java.srcDirs += "src/test-common/java"
