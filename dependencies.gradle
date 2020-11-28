@@ -39,13 +39,13 @@ ext.versions = [
     transformationLayout: '1.0.4',
 
     // whatIf
-    whatIfVersion       : '1.0.7',
+    whatIfVersion       : '1.0.8',
 
     // bundler
     bundlerVersion      : '1.0.2',
 
     // android veil
-    androidVeilVersion  : '1.1.0',
+    androidVeilVersion  : '1.1.1',
 
     // discrete scrollview
     discreteScrollview  : '1.4.9',

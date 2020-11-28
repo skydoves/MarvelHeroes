@@ -27,6 +27,7 @@ import com.skydoves.marvelheroes.model.PosterDetails
 import com.skydoves.marvelheroes.view.adapter.PosterAdapter
 import com.skydoves.marvelheroes.view.adapter.PosterSeriesAdapter
 import com.skydoves.whatif.whatIfNotNull
+import com.skydoves.whatif.whatIfNotNullAs
 import com.skydoves.whatif.whatIfNotNullOrEmpty
 import com.yarolegovich.discretescrollview.DiscreteScrollView
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
@@ -49,8 +50,10 @@ object RecyclerViewBinding {
   @JvmStatic
   @BindingAdapter("adapterPosterList")
   fun bindAdapterPosterList(view: DiscreteScrollView, posters: List<Poster>?) {
-    posters.whatIfNotNullOrEmpty {
-      (view.adapter as? PosterAdapter)?.updatePosterList(it)
+    posters.whatIfNotNullOrEmpty { items ->
+      view.adapter.whatIfNotNullAs<PosterAdapter> { adapter ->
+        adapter.updatePosterList(items)
+      }
     }
     view.setItemTransformer(
       ScaleTransformer.Builder()
