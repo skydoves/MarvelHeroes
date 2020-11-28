@@ -17,8 +17,6 @@
 package com.skydoves.marvelheroes.binding
 
 import android.graphics.drawable.Drawable
-import android.view.View
-import androidx.activity.OnBackPressedDispatcherOwner
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -67,11 +65,5 @@ object ViewBinding {
         }
       )
       .into(view)
-  }
-
-  @JvmStatic
-  @BindingAdapter("onBackPressed")
-  fun bindOnBackPressed(view: View, onBackPressedDispatcherOwner: OnBackPressedDispatcherOwner) {
-    view.setOnClickListener { onBackPressedDispatcherOwner.onBackPressedDispatcher.onBackPressed() }
   }
 }

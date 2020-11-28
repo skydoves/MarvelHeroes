@@ -36,10 +36,9 @@ class PosterSeriesAdapter(
     parent: ViewGroup,
     viewType: Int
   ): PosterSeriesViewHolder {
-    val inflater = LayoutInflater.from(parent.context)
     val binding =
       DataBindingUtil.inflate<ItemPosterSeriesBinding>(
-        inflater,
+        LayoutInflater.from(parent.context),
         R.layout.item_poster_series,
         parent,
         false
