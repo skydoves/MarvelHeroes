@@ -21,13 +21,16 @@ ext.versions = [
     roomVersion         : '2.2.5',
     archCompomentVersion: '2.1.0',
 
+    // binding
+    bindablesVersion     : '1.0.1',
+
     // di
     koinVersion         : '2.0.1',
 
     // network
     retrofitVersion     : '2.9.0',
     okhttpVersion       : '4.9.0',
-    sandwichVersion     : '1.0.7',
+    sandwichVersion     : '1.0.9',
 
     // coroutines
     coroutinesVersion   : '1.4.1',
