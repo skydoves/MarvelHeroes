@@ -16,10 +16,9 @@
 
 package com.skydoves.marvelheroes.view.adapter
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.skydoves.bindables.binding
 import com.skydoves.marvelheroes.R
 import com.skydoves.marvelheroes.databinding.ItemPosterSeriesBinding
 import com.skydoves.marvelheroes.databinding.LayoutPlotBinding
@@ -36,13 +35,7 @@ class PosterSeriesAdapter(
     parent: ViewGroup,
     viewType: Int
   ): PosterSeriesViewHolder {
-    val binding =
-      DataBindingUtil.inflate<ItemPosterSeriesBinding>(
-        LayoutInflater.from(parent.context),
-        R.layout.item_poster_series,
-        parent,
-        false
-      )
+    val binding = parent.binding<ItemPosterSeriesBinding>(R.layout.item_poster_series)
     return PosterSeriesViewHolder(binding).apply {
       binding.root.setOnClickListener {
         val position =

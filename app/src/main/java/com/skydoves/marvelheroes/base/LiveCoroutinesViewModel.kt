@@ -17,13 +17,13 @@
 package com.skydoves.marvelheroes.base
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import com.skydoves.bindables.BindingViewModel
 import com.skydoves.sandwich.disposables.CompositeDisposable
 import kotlinx.coroutines.Dispatchers
 
-abstract class LiveCoroutinesViewModel : ViewModel() {
+abstract class LiveCoroutinesViewModel : BindingViewModel() {
 
   val disposables: CompositeDisposable = CompositeDisposable()
 

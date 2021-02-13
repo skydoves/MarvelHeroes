@@ -18,10 +18,10 @@ package com.skydoves.marvelheroes.view.ui.details
 
 import android.content.Context
 import android.os.Bundle
+import com.skydoves.bindables.BindingActivity
 import com.skydoves.bundler.bundle
 import com.skydoves.bundler.intentOf
 import com.skydoves.marvelheroes.R
-import com.skydoves.marvelheroes.base.DatabindingActivity
 import com.skydoves.marvelheroes.databinding.ActivityPosterDetailBinding
 import com.skydoves.marvelheroes.extensions.onTransformationEndContainerApplyParams
 import com.skydoves.marvelheroes.model.Poster
@@ -30,15 +30,15 @@ import com.skydoves.transformationlayout.TransformationCompat
 import com.skydoves.transformationlayout.TransformationLayout
 import org.koin.android.viewmodel.ext.android.getViewModel
 
-class PosterDetailActivity : DatabindingActivity() {
+class PosterDetailActivity :
+  BindingActivity<ActivityPosterDetailBinding>(R.layout.activity_poster_detail) {
 
-  private val binding: ActivityPosterDetailBinding by binding(R.layout.activity_poster_detail)
   private val posterId: Long by bundle(EXTRA_POSTER_ID, 0)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     onTransformationEndContainerApplyParams()
     super.onCreate(savedInstanceState)
-    binding.apply {
+    binding {
       poster = getViewModel<PosterDetailViewModel>().getPoster(posterId)
       lifecycleOwner = this@PosterDetailActivity
       dispatcher = this@PosterDetailActivity

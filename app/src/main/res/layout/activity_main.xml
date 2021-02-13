@@ -70,7 +70,7 @@
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintRight_toRightOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/greeting"
-      app:toast="@{vm.toastLiveData}"
+      app:toast="@{vm.toast}"
       tools:listitem="@layout/item_poster" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>

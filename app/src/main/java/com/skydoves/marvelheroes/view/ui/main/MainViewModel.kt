@@ -16,9 +16,9 @@
 
 package com.skydoves.marvelheroes.view.ui.main
 
+import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.switchMap
+import com.skydoves.bindables.bindingProperty
 import com.skydoves.marvelheroes.base.LiveCoroutinesViewModel
 import com.skydoves.marvelheroes.model.Poster
 import com.skydoves.marvelheroes.repository.MainRepository
@@ -28,19 +28,17 @@ class MainViewModel constructor(
   private val mainRepository: MainRepository
 ) : LiveCoroutinesViewModel() {
 
-  private var posterFetchingLiveData: MutableLiveData<Boolean> = MutableLiveData(true)
   val posterListLiveData: LiveData<List<Poster>>
 
-  private val _toastLiveData: MutableLiveData<String> = MutableLiveData()
-  val toastLiveData: LiveData<String> get() = _toastLiveData
+  @get:Bindable
+  var toast: String? by bindingProperty(null)
+    private set
 
   init {
     Timber.d("injection MainViewModel")
 
-    posterListLiveData = posterFetchingLiveData.switchMap {
-      launchOnViewModelScope {
-        mainRepository.loadMarvelPosters(disposables) { _toastLiveData.postValue(it) }
-      }
+    posterListLiveData = launchOnViewModelScope {
+      mainRepository.loadMarvelPosters(disposables) { toast = it }
     }
   }
 }
