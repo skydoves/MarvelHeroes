@@ -10,7 +10,7 @@ ext.versions = [
     versionPlugin       : '0.23.0',
 
     // kotlin
-    kotlin              : '1.4.31',
+    kotlin              : '1.4.32',
 
     // support library
     materialVersion     : '1.4.0-beta01',
@@ -22,7 +22,7 @@ ext.versions = [
     archCompomentVersion: '2.1.0',
 
     // binding
-    bindablesVersion     : '1.0.7',
+    bindablesVersion     : '1.0.8',
 
     // di
     koinVersion         : '2.0.1',
@@ -45,7 +45,7 @@ ext.versions = [
     whatIfVersion       : '1.1.0',
 
     // bundler
-    bundlerVersion      : '1.0.3',
+    bundlerVersion      : '1.0.4',
 
     // android veil
     androidVeilVersion  : '1.1.1',
