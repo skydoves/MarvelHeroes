@@ -16,12 +16,12 @@
 
 package com.skydoves.marvelheroes.view.ui.details
 
-import com.skydoves.marvelheroes.base.LiveCoroutinesViewModel
+import androidx.lifecycle.ViewModel
 import com.skydoves.marvelheroes.repository.DetailRepository
 
 class PosterDetailViewModel(
   private val repository: DetailRepository
-) : LiveCoroutinesViewModel() {
+) : ViewModel() {
 
   fun getPoster(id: Long) = repository.getPosterById(id)
 }

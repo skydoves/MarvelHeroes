@@ -40,7 +40,6 @@ class PosterDetailActivity :
     super.onCreate(savedInstanceState)
     binding {
       poster = getViewModel<PosterDetailViewModel>().getPoster(posterId)
-      lifecycleOwner = this@PosterDetailActivity
       dispatcher = this@PosterDetailActivity
       adapter = PosterSeriesAdapter(plot)
     }
