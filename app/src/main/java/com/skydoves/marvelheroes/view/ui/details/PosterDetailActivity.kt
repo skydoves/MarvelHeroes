@@ -28,20 +28,22 @@ import com.skydoves.marvelheroes.model.Poster
 import com.skydoves.marvelheroes.view.adapter.PosterSeriesAdapter
 import com.skydoves.transformationlayout.TransformationCompat
 import com.skydoves.transformationlayout.TransformationLayout
-import org.koin.android.viewmodel.ext.android.getViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PosterDetailActivity :
   BindingActivity<ActivityPosterDetailBinding>(R.layout.activity_poster_detail) {
 
   private val posterId: Long by bundle(EXTRA_POSTER_ID, 0)
+  private val viewModel: PosterDetailViewModel by viewModel { parametersOf(posterId) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     onTransformationEndContainerApplyParams()
     super.onCreate(savedInstanceState)
     binding {
-      poster = getViewModel<PosterDetailViewModel>().getPoster(posterId)
       dispatcher = this@PosterDetailActivity
       adapter = PosterSeriesAdapter(plot)
+      vm = viewModel
     }
   }
 

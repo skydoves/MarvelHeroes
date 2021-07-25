@@ -16,12 +16,21 @@
 
 package com.skydoves.marvelheroes.view.ui.details
 
-import androidx.lifecycle.ViewModel
+import androidx.databinding.Bindable
+import androidx.lifecycle.viewModelScope
+import com.skydoves.bindables.BindingViewModel
+import com.skydoves.bindables.asBindingProperty
+import com.skydoves.marvelheroes.model.Poster
 import com.skydoves.marvelheroes.repository.DetailRepository
+import kotlinx.coroutines.flow.Flow
 
 class PosterDetailViewModel(
-  private val repository: DetailRepository
-) : ViewModel() {
+  posterId: Long,
+  repository: DetailRepository
+) : BindingViewModel() {
 
-  fun getPoster(id: Long) = repository.getPosterById(id)
+  private val posterFlow: Flow<Poster> = repository.getPosterById(posterId)
+
+  @get:Bindable
+  val poster: Poster? by posterFlow.asBindingProperty(viewModelScope, null)
 }
