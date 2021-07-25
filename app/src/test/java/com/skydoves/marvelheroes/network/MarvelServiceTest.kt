@@ -22,6 +22,9 @@ import com.skydoves.marvelheroes.model.Poster
 import com.skydoves.sandwich.ApiResponse
 import com.skydoves.sandwich.ResponseDataSource
 import com.skydoves.sandwich.disposables.CompositeDisposable
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
@@ -29,6 +32,7 @@ import org.junit.Before
 import org.junit.Test
 import retrofit2.Response
 import java.io.IOException
+import kotlin.coroutines.EmptyCoroutineContext
 
 class MarvelServiceTest : ApiAbstract<MarvelService>() {
 
@@ -53,7 +57,7 @@ class MarvelServiceTest : ApiAbstract<MarvelService>() {
     assertThat(responseBody[0].color, `is`("#770609"))
 
     val dataSource = ResponseDataSource<List<Poster>>()
-    val onResult: (response: ApiResponse<List<Poster>>) -> Unit = {
+    val onResult: suspend (response: ApiResponse<List<Poster>>) -> Unit = {
       assertThat(it, instanceOf(ApiResponse.Success::class.java))
       val response: List<Poster> = requireNotNull((it as ApiResponse.Success).data)
       assertThat(response[0].id, `is`(0L))
@@ -62,11 +66,16 @@ class MarvelServiceTest : ApiAbstract<MarvelService>() {
     }
 
     val compositeDisposable = CompositeDisposable()
-    whenever(client.fetchMarvelPosters(dataSource, compositeDisposable, onResult)).thenAnswer {
-      val response: (response: ApiResponse<List<Poster>>) -> Unit = it.getArgument(2)
-      response(ApiResponse.Success(Response.success(responseBody)))
+    val scope = CoroutineScope(EmptyCoroutineContext + Dispatchers.IO)
+    whenever(
+      client.fetchMarvelPosters(dataSource, compositeDisposable, scope, onResult)
+    ).thenAnswer {
+      val response: suspend (response: ApiResponse<List<Poster>>) -> Unit = it.getArgument(3)
+      scope.launch {
+        response(ApiResponse.Success(Response.success(responseBody)))
+      }
     }
 
-    client.fetchMarvelPosters(dataSource, compositeDisposable, onResult)
+    client.fetchMarvelPosters(dataSource, compositeDisposable, scope, onResult)
   }
 }

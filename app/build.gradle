@@ -39,6 +39,11 @@ android {
       returnDefaultValues = true
     }
   }
+  tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions.freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    kotlinOptions.freeCompilerArgs += ["-Xopt-in=kotlin.time.ExperimentalTime"]
+    kotlinOptions.freeCompilerArgs += ["-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"]
+  }
 }
 
 dependencies {
@@ -48,8 +53,6 @@ dependencies {
 
   // architecture components
   implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleVersion"
-  implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion"
-  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion"
   implementation "androidx.room:room-runtime:$versions.roomVersion"
   kapt "androidx.room:room-compiler:$versions.roomVersion"
   testImplementation "androidx.arch.core:core-testing:$versions.archCompomentVersion"
@@ -99,6 +102,7 @@ dependencies {
   // unit test
   testImplementation "junit:junit:$versions.junitVersion"
   testImplementation "androidx.test:core:$versions.androidxTest"
+  testImplementation "app.cash.turbine:turbine:$versions.turbineVersion"
   testImplementation "org.robolectric:robolectric:$versions.robolectricVersion"
   testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockitoKotlinVersion"
   testImplementation "org.mockito:mockito-inline:$versions.mockitoInlineVersion"
