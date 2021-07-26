@@ -16,11 +16,9 @@
 
 package com.skydoves.marvelheroes.viewmodel
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
-import com.nhaarman.mockitokotlin2.atLeastOnce
+import androidx.lifecycle.viewModelScope
+import app.cash.turbine.test
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.skydoves.marvelheroes.MainCoroutinesRule
 import com.skydoves.marvelheroes.model.Poster
@@ -32,13 +30,13 @@ import com.skydoves.marvelheroes.utils.MockTestUtil
 import com.skydoves.marvelheroes.view.ui.main.MainViewModel
 import com.skydoves.sandwich.ResponseDataSource
 import com.skydoves.sandwich.disposables.CompositeDisposable
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import kotlin.time.seconds
 
-@ExperimentalCoroutinesApi
 class MainViewModelTest {
 
   private lateinit var viewModel: MainViewModel
@@ -48,14 +46,9 @@ class MainViewModelTest {
   private val posterDao: PosterDao = mock()
   private val dataSource: ResponseDataSource<List<Poster>> = mock()
 
-  @ExperimentalCoroutinesApi
   @get:Rule
   var coroutinesRule = MainCoroutinesRule()
 
-  @get:Rule
-  var instantExecutorRule = InstantTaskExecutorRule()
-
-  @ExperimentalCoroutinesApi
   @Before
   fun setup() {
     mainRepository = MainRepository(marvelClient, dataSource, posterDao)
@@ -68,12 +61,14 @@ class MainViewModelTest {
     whenever(posterDao.getPosterList()).thenReturn(mockData)
 
     val compositeDisposable = CompositeDisposable()
-    val fetchedData = mainRepository.loadMarvelPosters(compositeDisposable) { }
-    val observer: Observer<List<Poster>> = mock()
-    fetchedData.observeForever(observer)
-
-    verify(posterDao, atLeastOnce()).getPosterList()
-    verify(observer).onChanged(mockData)
-    fetchedData.removeObserver(observer)
+    mainRepository.loadMarvelPosters(
+      compositeDisposable,
+      viewModel.viewModelScope
+    ) {
+    }.test(2.seconds) {
+      val item = expectItem()
+      Assert.assertEquals(item, mockData)
+      expectComplete()
+    }
   }
 }

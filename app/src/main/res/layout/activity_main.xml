@@ -63,7 +63,7 @@
       android:layout_width="match_parent"
       android:layout_height="0dp"
       app:adapter="@{adapter}"
-      app:adapterPosterList="@{vm.posterListLiveData}"
+      app:adapterPosterList="@{vm.posterList}"
       app:bindOnItemChanged="@{adapter}"
       app:bindOnItemChangedBackground="@{pointView}"
       app:layout_constraintBottom_toBottomOf="parent"

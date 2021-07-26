@@ -18,8 +18,7 @@
 
 package com.skydoves.marvelheroes.repository
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
 import com.nhaarman.mockitokotlin2.atLeastOnce
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
@@ -31,6 +30,7 @@ import com.skydoves.marvelheroes.network.MarvelClient
 import com.skydoves.marvelheroes.network.MarvelService
 import com.skydoves.marvelheroes.persistence.PosterDao
 import com.skydoves.marvelheroes.utils.MockTestUtil.mockPosterList
+import com.skydoves.marvelheroes.view.ui.main.MainViewModel
 import com.skydoves.sandwich.ResponseDataSource
 import com.skydoves.sandwich.disposables.CompositeDisposable
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -42,24 +42,21 @@ import org.junit.Test
 @ExperimentalCoroutinesApi
 class MainRepositoryTest {
 
+  private lateinit var viewModel: MainViewModel
   private lateinit var repository: MainRepository
   private lateinit var client: MarvelClient
   private val service: MarvelService = mock()
   private val posterDao: PosterDao = mock()
   private val dataSource: ResponseDataSource<List<Poster>> = ResponseDataSource()
 
-  @ExperimentalCoroutinesApi
   @get:Rule
   var coroutinesRule = MainCoroutinesRule()
 
-  @get:Rule
-  var instantExecutorRule = InstantTaskExecutorRule()
-
-  @ExperimentalCoroutinesApi
   @Before
   fun setup() {
     client = MarvelClient(service)
     repository = MainRepository(client, dataSource, posterDao)
+    viewModel = MainViewModel(repository)
   }
 
   @Test
@@ -69,18 +66,14 @@ class MainRepositoryTest {
     whenever(service.fetchMarvelPosterList()).thenReturn(getCall(mockData))
 
     val compositeDisposable = CompositeDisposable()
-    val loadData = repository.loadMarvelPosters(compositeDisposable) { }
+    repository.loadMarvelPosters(
+      compositeDisposable,
+      viewModel.viewModelScope
+    ) {
+    }
+
     verify(posterDao, atLeastOnce()).getPosterList()
     verify(service, atLeastOnce()).fetchMarvelPosterList()
-
-    val observer: Observer<List<Poster>> = mock()
-    loadData.observeForever(observer)
-
-    val updatedData = mockPosterList()
-    whenever(posterDao.getPosterList()).thenReturn(updatedData)
-
-    loadData.postValue(updatedData)
-    verify(observer).onChanged(updatedData)
-    loadData.removeObserver(observer)
+    Unit
   }
 }

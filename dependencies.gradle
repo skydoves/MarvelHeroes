@@ -22,7 +22,7 @@ ext.versions = [
     archCompomentVersion: '2.1.0',
 
     // binding
-    bindablesVersion     : '1.0.8',
+    bindablesVersion    : '1.0.8',
 
     // di
     koinVersion         : '2.0.1',
@@ -30,7 +30,7 @@ ext.versions = [
     // network
     retrofitVersion     : '2.9.0',
     okhttpVersion       : '4.9.0',
-    sandwichVersion     : '1.1.0',
+    sandwichVersion     : '1.2.1',
 
     // coroutines
     coroutinesVersion   : '1.4.3',
@@ -60,6 +60,7 @@ ext.versions = [
     junitVersion        : '4.13.1',
     androidxTest        : '1.3.0',
     unitTestCoreVersion : '1.2.0',
+    turbineVersion      : '0.5.2',
     robolectricVersion  : '4.4',
     androidxTestRules   : '1.2.0-alpha04',
     mockWebServerVersion: '4.9.0',

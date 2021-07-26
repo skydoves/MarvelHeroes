@@ -6,8 +6,8 @@
   <data>
 
     <variable
-      name="poster"
-      type="com.skydoves.marvelheroes.model.Poster" />
+      name="vm"
+      type="com.skydoves.marvelheroes.view.ui.details.PosterDetailViewModel" />
 
     <variable
       name="adapter"
@@ -68,7 +68,7 @@
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
-              app:loadImageWithVeil="@{poster.poster}"
+              app:loadImageWithVeil="@{vm.poster.poster}"
               app:withVeil="@{posterVeil}" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -96,7 +96,7 @@
               android:layout_marginStart="22dp"
               android:layout_marginBottom="8dp"
               android:maxLines="1"
-              android:text="@{poster.name}"
+              android:text="@{vm.poster.name}"
               android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
               android:textColor="@color/white"
               android:textSize="36sp"
@@ -111,7 +111,7 @@
               android:layout_height="wrap_content"
               android:layout_marginStart="26dp"
               android:layout_marginBottom="26dp"
-              android:text="@{poster.quote}"
+              android:text="@{vm.poster.quote}"
               android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
               android:textColor="@color/white_93"
               android:textSize="24sp"
@@ -125,7 +125,7 @@
             <include
               android:id="@+id/plot"
               layout="@layout/layout_plot"
-              app:details="@{poster.details[0]}" />
+              app:details="@{vm.poster.details[0]}" />
 
           </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -156,12 +156,12 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="12dp"
         android:clipToPadding="false"
+        android:nestedScrollingEnabled="false"
         android:orientation="horizontal"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         android:paddingBottom="4dp"
-        android:nestedScrollingEnabled="false"
-        app:adapterPosterDetailsList="@{poster.details}"
+        app:adapterPosterDetailsList="@{vm.poster.details}"
         app:adapterPosterSeries="@{adapter}"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"

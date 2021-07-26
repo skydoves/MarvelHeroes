@@ -21,13 +21,15 @@ import com.skydoves.sandwich.ApiResponse
 import com.skydoves.sandwich.DataRetainPolicy
 import com.skydoves.sandwich.ResponseDataSource
 import com.skydoves.sandwich.disposables.CompositeDisposable
+import kotlinx.coroutines.CoroutineScope
 
 class MarvelClient(private val marvelService: MarvelService) {
 
   fun fetchMarvelPosters(
     dataSource: ResponseDataSource<List<Poster>>,
     disposable: CompositeDisposable,
-    onResult: (response: ApiResponse<List<Poster>>) -> Unit
+    coroutineScope: CoroutineScope,
+    onResult: suspend (response: ApiResponse<List<Poster>>) -> Unit
   ) {
     dataSource
       // Retain fetched data on the memory storage temporarily.
@@ -38,7 +40,7 @@ class MarvelClient(private val marvelService: MarvelService) {
       // joins onto CompositeDisposable as a disposable and dispose onCleared().
       .joinDisposable(disposable)
       // combine network service to the data source.
-      .combine(marvelService.fetchMarvelPosterList(), onResult)
+      .suspendCombine(marvelService.fetchMarvelPosterList(), coroutineScope, onResult)
       // request API network call asynchronously.
       // if the request is successful, the data source will hold the success data.
       // in the next request after success, returns the cached API response with data.

@@ -16,7 +16,7 @@
 
 package com.skydoves.marvelheroes.repository
 
-import androidx.lifecycle.MutableLiveData
+import androidx.annotation.WorkerThread
 import com.skydoves.marvelheroes.mapper.ErrorResponseMapper
 import com.skydoves.marvelheroes.model.Poster
 import com.skydoves.marvelheroes.model.PosterErrorResponse
@@ -27,12 +27,16 @@ import com.skydoves.sandwich.ResponseDataSource
 import com.skydoves.sandwich.disposables.CompositeDisposable
 import com.skydoves.sandwich.map
 import com.skydoves.sandwich.message
-import com.skydoves.sandwich.onError
-import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.onSuccess
-import com.skydoves.whatif.whatIfNotNull
+import com.skydoves.sandwich.suspendOnError
+import com.skydoves.sandwich.suspendOnException
+import com.skydoves.sandwich.suspendOnSuccess
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flowOn
 import timber.log.Timber
 
 class MainRepository constructor(
@@ -45,37 +49,41 @@ class MainRepository constructor(
     Timber.d("Injection MainRepository")
   }
 
-  suspend fun loadMarvelPosters(
+  @WorkerThread
+  @ExperimentalCoroutinesApi
+  fun loadMarvelPosters(
     disposable: CompositeDisposable,
+    coroutineScope: CoroutineScope,
     error: (String?) -> Unit
-  ) = withContext(Dispatchers.IO) {
-    val liveData = MutableLiveData<List<Poster>>()
+  ) = callbackFlow {
     val posters = posterDao.getPosterList()
     if (posters.isEmpty()) {
       /**
        * fetch [Poster] from the network and getting [ApiResponse] asynchronously.
        * @see [onSuccess](https://github.com/skydoves/sandwich#onsuccess-onerror-onexception)
        * */
-      marvelClient.fetchMarvelPosters(marvelDataSource, disposable) { apiResponse ->
+      marvelClient.fetchMarvelPosters(marvelDataSource, disposable, coroutineScope) { apiResponse ->
         apiResponse
           // handle the case when the API request gets a success response.
-          .onSuccess {
-            data.whatIfNotNull {
-              liveData.postValue(it)
-              posterDao.insertPosterList(it)
-            }
+          .suspendOnSuccess {
+            posterDao.insertPosterList(data)
+            send(data)
           }
           // handle the case when the API request gets an error response.
           // e.g. internal server error.
-          .onError {
+          .suspendOnError {
             /** maps the [ApiResponse.Failure.Error] to the [PosterErrorResponse] using the mapper. */
             map(ErrorResponseMapper) { error("[Code: $code]: $message") }
           }
           // handle the case when the API request gets an exception response.
           // e.g., network connection error.
-          .onException { error(message()) }
+          .suspendOnException { error(message()) }
+        close()
       }
+    } else {
+      send(posters)
+      close()
     }
-    liveData.apply { postValue(posters) }
-  }
+    awaitClose()
+  }.flowOn(Dispatchers.IO)
 }

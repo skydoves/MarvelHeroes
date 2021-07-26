@@ -29,7 +29,7 @@ import com.skydoves.androidveil.VeilLayout
 object ViewBinding {
   @JvmStatic
   @BindingAdapter("loadImage")
-  fun bindLoadImage(view: AppCompatImageView, url: String) {
+  fun bindLoadImage(view: AppCompatImageView, url: String?) {
     Glide.with(view.context)
       .load(url)
       .into(view)
@@ -37,7 +37,7 @@ object ViewBinding {
 
   @JvmStatic
   @BindingAdapter("withVeil", "loadImageWithVeil")
-  fun bindLoadImageWithVeil(view: AppCompatImageView, veilLayout: VeilLayout, url: String) {
+  fun bindLoadImageWithVeil(view: AppCompatImageView, veilLayout: VeilLayout, url: String?) {
     Glide.with(view.context)
       .load(url)
       .listener(
