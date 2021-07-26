@@ -30,7 +30,7 @@ ext.versions = [
     // network
     retrofitVersion     : '2.9.0',
     okhttpVersion       : '4.9.0',
-    sandwichVersion     : '1.2.1-SNAPSHOT',
+    sandwichVersion     : '1.2.1',
 
     // coroutines
     coroutinesVersion   : '1.4.3',
