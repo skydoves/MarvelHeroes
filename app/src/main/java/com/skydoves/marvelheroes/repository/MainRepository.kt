@@ -73,10 +73,6 @@ class MainRepository constructor(
           // e.g. internal server error.
           .suspendOnError {
             /** maps the [ApiResponse.Failure.Error] to the [PosterErrorResponse] using the mapper. */
-            /** maps the [ApiResponse.Failure.Error] to the [PosterErrorResponse] using the mapper. */
-            /** maps the [ApiResponse.Failure.Error] to the [PosterErrorResponse] using the mapper. */
-
-            /** maps the [ApiResponse.Failure.Error] to the [PosterErrorResponse] using the mapper. */
             map(ErrorResponseMapper) { error("[Code: $code]: $message") }
           }
           // handle the case when the API request gets an exception response.
