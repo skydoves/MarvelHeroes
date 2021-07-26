@@ -16,34 +16,45 @@
 
 package com.skydoves.marvelheroes.viewmodel
 
+import app.cash.turbine.test
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import com.skydoves.marvelheroes.persistence.PosterDao
 import com.skydoves.marvelheroes.repository.DetailRepository
 import com.skydoves.marvelheroes.utils.MockTestUtil.mockPoster
 import com.skydoves.marvelheroes.view.ui.details.PosterDetailViewModel
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.core.Is.`is`
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import kotlin.time.seconds
 
 class PosterDetailViewModelTest {
 
   private lateinit var viewModel: PosterDetailViewModel
-  private val repository: DetailRepository = mock()
+  private val posterDao: PosterDao = mock()
+  private val repository: DetailRepository = DetailRepository(posterDao)
 
   @Before
   fun setup() {
-    viewModel = PosterDetailViewModel(repository)
+    viewModel = PosterDetailViewModel(0, repository)
   }
 
   @Test
-  fun getPosterTest() {
+  fun getPosterTest() = runBlocking {
     val mockData = mockPoster()
-    whenever(repository.getPosterById(0)).thenReturn(mockPoster())
+    whenever(posterDao.getPoster(0)).thenReturn(mockPoster())
 
-    val loadFromDB = viewModel.getPoster(0)
-    verify(repository).getPosterById(0)
-    assertThat(loadFromDB, `is`(mockData))
+    repository.getPosterById(0).test(2.seconds) {
+      val item = expectItem()
+      Assert.assertEquals(item, mockData)
+      expectComplete()
+    }
+
+    viewModel.posterFlow.test(2.seconds) {
+      val item = expectItem()
+      Assert.assertEquals(item, mockData)
+      expectComplete()
+    }
   }
 }

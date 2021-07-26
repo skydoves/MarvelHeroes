@@ -16,6 +16,7 @@
 
 package com.skydoves.marvelheroes.view.ui.details
 
+import androidx.annotation.VisibleForTesting
 import androidx.databinding.Bindable
 import androidx.lifecycle.viewModelScope
 import com.skydoves.bindables.BindingViewModel
@@ -29,7 +30,8 @@ class PosterDetailViewModel(
   repository: DetailRepository
 ) : BindingViewModel() {
 
-  private val posterFlow: Flow<Poster> = repository.getPosterById(posterId)
+  @VisibleForTesting
+  internal val posterFlow: Flow<Poster> = repository.getPosterById(posterId)
 
   @get:Bindable
   val poster: Poster? by posterFlow.asBindingProperty(viewModelScope, null)

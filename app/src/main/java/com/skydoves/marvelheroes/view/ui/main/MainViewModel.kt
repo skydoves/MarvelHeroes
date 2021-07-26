@@ -16,6 +16,7 @@
 
 package com.skydoves.marvelheroes.view.ui.main
 
+import androidx.annotation.VisibleForTesting
 import androidx.databinding.Bindable
 import androidx.lifecycle.viewModelScope
 import com.skydoves.bindables.asBindingProperty
@@ -33,7 +34,8 @@ class MainViewModel constructor(
   var toast: String? by bindingProperty(null)
     private set
 
-  private val posterListFlow =
+  @VisibleForTesting
+  internal val posterListFlow =
     mainRepository.loadMarvelPosters(disposables, viewModelScope) { toast = it }
 
   @get:Bindable

@@ -16,15 +16,16 @@
 
 package com.skydoves.marvelheroes.repository
 
+import app.cash.turbine.test
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.skydoves.marvelheroes.persistence.PosterDao
 import com.skydoves.marvelheroes.utils.MockTestUtil.mockPoster
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.core.Is.`is`
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import kotlin.time.seconds
 
 class DetailRepositoryTest {
 
@@ -37,12 +38,14 @@ class DetailRepositoryTest {
   }
 
   @Test
-  fun getPosterByIdTest() {
+  fun getPosterByIdTest() = runBlocking {
     val mockData = mockPoster()
     whenever(posterDao.getPoster(0)).thenReturn(mockPoster())
 
-    val loadFromDB = repository.getPosterById(0)
-    verify(posterDao).getPoster(0)
-    assertThat(loadFromDB, `is`(mockData))
+    repository.getPosterById(0).test(2.seconds) {
+      val item = expectItem()
+      Assert.assertEquals(item, mockData)
+      expectComplete()
+    }
   }
 }

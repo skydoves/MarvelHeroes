@@ -16,7 +16,6 @@
 
 package com.skydoves.marvelheroes.viewmodel
 
-import androidx.lifecycle.viewModelScope
 import app.cash.turbine.test
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -29,7 +28,6 @@ import com.skydoves.marvelheroes.repository.MainRepository
 import com.skydoves.marvelheroes.utils.MockTestUtil
 import com.skydoves.marvelheroes.view.ui.main.MainViewModel
 import com.skydoves.sandwich.ResponseDataSource
-import com.skydoves.sandwich.disposables.CompositeDisposable
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
@@ -60,12 +58,7 @@ class MainViewModelTest {
     val mockData = MockTestUtil.mockPosterList()
     whenever(posterDao.getPosterList()).thenReturn(mockData)
 
-    val compositeDisposable = CompositeDisposable()
-    mainRepository.loadMarvelPosters(
-      compositeDisposable,
-      viewModel.viewModelScope
-    ) {
-    }.test(2.seconds) {
+    viewModel.posterListFlow.test(2.seconds) {
       val item = expectItem()
       Assert.assertEquals(item, mockData)
       expectComplete()
