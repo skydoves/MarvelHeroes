@@ -56,6 +56,8 @@ MarvelHeroes is based on MVVM architecture and a repository pattern.
 
 ![architecture](https://user-images.githubusercontent.com/24237865/77502018-f7d36000-6e9c-11ea-92b0-1097240c8689.png)
 
+## Content Credits
+All copyrights of the contents, concepts, and phrases that are used in this open-source project belong to [Marvel Studios](https://www.marvel.com/).
 
 ## Find this repository useful? :heart:
 Support it by joining __[stargazers](https://github.com/skydoves/MarvelHeroes/stargazers)__ for this repository. :star: <br>
